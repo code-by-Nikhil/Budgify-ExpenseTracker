@@ -1,7 +1,6 @@
 import React from "react";
 import ExpenseForm from "./ExpenseForm";
 import { useGetExpensesQuery } from "./services/apiSlice";
-import { Heading, Text, Box } from '@chakra-ui/react'
 
 export default function Expenses() {
 
@@ -9,11 +8,11 @@ export default function Expenses() {
   const { data } = useGetExpensesQuery();
 
   return (
-    <Box>
-      <Heading color="teal.500" mb={2}>Expenses</Heading>
-      <Text color="gray.500" mb={6}>Your smart path to financial freedom 📈</Text>
+    <section className="py-6">
+      <h2 className="text-2xl font-semibold text-indigo-600 mb-2">Expenses</h2>
+      <p className="text-slate-500 mb-6">Your smart path to financial freedom 📈</p>
 
       <ExpenseForm expenses={data?.result} />
-    </Box>
+    </section>
   );
 }

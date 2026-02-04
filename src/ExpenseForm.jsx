@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ExpenseCard from "./ExpenseCard";
+import ConfirmModal from "./components/ui/ConfirmModal";
 import {
   useCreateExpensesMutation,
   useDeleteExpensesMutation,
   useUpdateExpensesMutation,
 } from "./services/apiSlice";
-import { Box, Grid, Button, Stack, Input, Select, Heading } from '@chakra-ui/react'
 
 export default function ExpenseForm({ expenses }) {
   const [title, setTitle] = useState("");
@@ -14,8 +14,6 @@ export default function ExpenseForm({ expenses }) {
   const [category, setCategory] = useState("Food");
 
   const [display, setDisplay] = useState(true);
-
-  // const [expenses, setExpenses] = useState([]);
   const [editId, setEditId] = useState(null);
 
   const [createExpense] = useCreateExpensesMutation();
@@ -24,81 +22,65 @@ export default function ExpenseForm({ expenses }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     const payload = { title, amount: Number(amount), date, category };
-
     try {
-      if (editId) {
-        await updateExpense({ id: editId, ...payload }).unwrap();
-      } else {
-        await createExpense(payload).unwrap();
-      }
-
-      // reset
-      setTitle("");
-      setAmount("");
-      setDate("");
-      setCategory("Food");
-
-      setEditId(null);
-      setDisplay(true);
-
-    } catch (error) {
-      console.error(error);
-    }
+      if (editId) await updateExpense({ id: editId, ...payload }).unwrap();
+      else await createExpense(payload).unwrap();
+      setTitle(""); setAmount(""); setDate(""); setCategory("Food"); setEditId(null); setDisplay(true);
+    } catch (error) { console.error(error); }
   }
 
   function handleEdit(expense) {
-    setTitle(expense.title);
-    setAmount(expense.amount);
-    setDate(expense.date?.slice(0, 10));
-    setCategory(expense.category);
-
-    setEditId(expense._id);
-    setDisplay(false);
+    setTitle(expense.title); setAmount(expense.amount); setDate(expense.date?.slice(0, 10)); setCategory(expense.category); setEditId(expense._id); setDisplay(false);
   }
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [selectedDeleteId, setSelectedDeleteId] = useState(null);
+
   async function handleDelete(id) {
-    try {
-      await deleteExpense(id).unwrap();
-    } catch (err) {
-      console.error(err);
-    }
+    try { await deleteExpense(id).unwrap(); } catch (err) { console.error(err); }
+  }
+
+  function askDelete(id){
+    setSelectedDeleteId(id);
+    setConfirmOpen(true);
   }
 
   return (
-    <Box>
-      <Stack direction={{base: 'column', md: 'row'}} justify="space-between" align="center" mb={6}>
-        <Heading size="md">📊Tracked Expenses</Heading>
-        {display && <Button colorScheme="teal" onClick={()=>setDisplay(false)}>+ Add Expense</Button>}
-      </Stack>
+    <section>
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="text-lg font-semibold">📊 Tracked Expenses</h3>
+        {display && <button className="px-4 py-2 rounded-xl bg-indigo-600 text-white" onClick={()=>setDisplay(false)}>+ Add Expense</button>}
+      </div>
 
       {!display && (
-        <Box bg="white" p={6} rounded="md" boxShadow="sm" mb={6}>
+        <div className="bg-white p-6 rounded-xl shadow mb-6">
           <form onSubmit={handleSubmit}>
-            <Grid templateColumns={{base: '1fr', md: '2fr 1fr'}} gap={4}>
-              <Input placeholder="Title" value={title} onChange={(e)=>setTitle(e.target.value)} />
-              <Input placeholder="Amount" type="number" value={amount} onChange={(e)=>setAmount(e.target.value)} />
-              <Input placeholder="Date" type="date" value={date} onChange={(e)=>setDate(e.target.value)} />
-              <Select value={category} onChange={(e)=>setCategory(e.target.value)}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <input className="col-span-2 p-3 rounded-md ring-1 ring-slate-200" placeholder="Title" value={title} onChange={(e)=>setTitle(e.target.value)} />
+              <input className="p-3 rounded-md ring-1 ring-slate-200" placeholder="Amount" type="number" value={amount} onChange={(e)=>setAmount(e.target.value)} />
+              <input className="p-3 rounded-md ring-1 ring-slate-200" placeholder="Date" type="date" value={date} onChange={(e)=>setDate(e.target.value)} />
+              <select className="p-3 rounded-md ring-1 ring-slate-200" value={category} onChange={(e)=>setCategory(e.target.value)}>
                 <option value="Food">Food</option>
                 <option value="Petrol">Petrol</option>
-              </Select>
-            </Grid>
+              </select>
+            </div>
 
-            <Stack direction="row" justify="flex-end" mt={4}>
-              <Button variant="ghost" onClick={()=>setDisplay(true)}>Cancel</Button>
-              <Button colorScheme="green" type="submit">{editId ? 'Update' : 'Add Expense'}</Button>
-            </Stack>
+            <div className="flex justify-end gap-3 mt-4">
+              <button type="button" className="px-3 py-2 rounded-md" onClick={()=>setDisplay(true)}>Cancel</button>
+              <button type="submit" className="px-4 py-2 rounded-xl bg-green-600 text-white">{editId ? 'Update' : 'Add Expense'}</button>
+            </div>
           </form>
-        </Box>
+        </div>
       )}
 
-      <Grid templateColumns={{base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)'}} gap={4}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {expenses?.map((expense) => (
-          <ExpenseCard key={expense._id} expense={expense} onEdit={() => handleEdit(expense)} onDelete={() => handleDelete(expense._id)} />
+          <ExpenseCard key={expense._id} expense={expense} onEdit={() => handleEdit(expense)} onDelete={() => askDelete(expense._id)} />
         ))}
-      </Grid>
-    </Box>
+      </div>
+
+      <ConfirmModal isOpen={confirmOpen} onClose={()=>setConfirmOpen(false)} onConfirm={async ()=>{ await handleDelete(selectedDeleteId); setConfirmOpen(false); }} message="Delete this expense?" />
+    </section>
   );
 }

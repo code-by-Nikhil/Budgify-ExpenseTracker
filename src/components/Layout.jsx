@@ -1,14 +1,11 @@
 import React from 'react'
-import { Box, Container } from '@chakra-ui/react'
 import Navbar from './Navbar'
 
 export default function Layout({ children }) {
   return (
-    <Box minH="100vh">
+    <div className="min-h-screen bg-slate-50">
       <Navbar />
-      <Container maxW="container.lg" py={8}>
-        {children}
-      </Container>
-    </Box>
+      <main className="max-w-6xl mx-auto py-8 px-4">{children}</main>
+    </div>
   )
 }

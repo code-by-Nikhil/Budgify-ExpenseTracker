@@ -1,37 +1,25 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import {
-  Box,
-  Flex,
-  HStack,
-  IconButton,
-  Text,
-  Link as ChakraLink,
-} from '@chakra-ui/react'
 
 export default function Navbar() {
   const navigate = useNavigate()
 
   return (
-    <Box
-      px={4}
-      boxShadow="sm"
-      borderBottomWidth={1}
-    >
-      <Flex h={16} alignItems={'center'} justifyContent={'space-between'} maxW="container.lg" mx="auto">
-        <HStack spacing={4} alignItems={'center'}>
-          <Text fontWeight="bold" fontSize="lg" color="teal.500" cursor="pointer" onClick={() => navigate('/')}>Budgify</Text>
-          <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <ChakraLink as={Link} to="/expenses">Expenses</ChakraLink>
-            <ChakraLink as={Link} to="/login">Login</ChakraLink>
-            <ChakraLink as={Link} to="/register">Register</ChakraLink>
-          </HStack>
-        </HStack>
+    <header className="sticky top-0 bg-white/60 backdrop-blur-md border-b border-slate-100 z-20">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center gap-6">
+          <button onClick={()=>navigate('/')} className="text-indigo-600 font-bold text-lg">Budgify</button>
+          <nav className="hidden md:flex gap-4 text-slate-700">
+            <Link to="/expenses" className="hover:underline">Expenses</Link>
+            <Link to="/login" className="hover:underline">Login</Link>
+            <Link to="/register" className="hover:underline">Register</Link>
+          </nav>
+        </div>
 
-        <Flex alignItems={'center'}>
-          {/* Color mode toggle removed to avoid build-time export mismatch; theme still supports initial color mode */}
-        </Flex>
-      </Flex>
-    </Box>
+        <div className="flex items-center gap-3">
+          {/* placeholder for user avatar/actions */}
+        </div>
+      </div>
+    </header>
   )
 }
