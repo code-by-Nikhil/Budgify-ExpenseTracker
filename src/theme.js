@@ -1,25 +1,5 @@
-import { extendTheme } from '@chakra-ui/react'
+// Theme file left minimal for compatibility with installed Chakra version
+// If you want custom tokens or config, update after verifying Chakra API for this version
 
-const config = {
-  initialColorMode: 'light',
-  useSystemColorMode: false,
-}
-
-const colors = {
-  brand: {
-    50: '#f0fdfa',
-    100: '#ccfbf1',
-    200: '#99f6e4',
-    300: '#5eead4',
-    400: '#2dd4bf',
-    500: '#14b8a6',
-    600: '#0d9488',
-    700: '#0f766e',
-    800: '#115e59',
-    900: '#134e4a',
-  },
-}
-
-const theme = extendTheme({ config, colors })
-
+const theme = {}
 export default theme

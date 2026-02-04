@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Text, Stack, HStack, Tag, IconButton } from '@chakra-ui/react'
-import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export default function ExpenseCard({ expense, onDelete, onEdit }) {
   return (
@@ -15,8 +14,8 @@ export default function ExpenseCard({ expense, onDelete, onEdit }) {
         <Text>{expense.category}</Text>
 
         <HStack spacing={3} mt={2}>
-          <IconButton size="sm" aria-label="Edit" icon={<EditIcon />} onClick={onEdit} />
-          <IconButton size="sm" aria-label="Delete" icon={<DeleteIcon />} colorScheme="red" onClick={onDelete} />
+          <IconButton size="sm" aria-label="Edit" icon={<span>✏️</span>} onClick={onEdit} />
+          <IconButton size="sm" aria-label="Delete" icon={<span>🗑️</span>} colorScheme="red" onClick={onDelete} />
         </HStack>
       </Stack>
     </Box>

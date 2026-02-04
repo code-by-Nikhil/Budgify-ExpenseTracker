@@ -6,18 +6,14 @@ import {
   HStack,
   IconButton,
   Text,
-  useColorMode,
   Link as ChakraLink,
 } from '@chakra-ui/react'
-import { SunIcon, MoonIcon } from '@chakra-ui/icons'
 
 export default function Navbar() {
-  const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate()
 
   return (
     <Box
-      bg={colorMode === 'light' ? 'white' : 'gray.800'}
       px={4}
       boxShadow="sm"
       borderBottomWidth={1}
@@ -33,7 +29,7 @@ export default function Navbar() {
         </HStack>
 
         <Flex alignItems={'center'}>
-          <IconButton aria-label="Toggle color mode" icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />} onClick={toggleColorMode} />
+          {/* Color mode toggle removed to avoid build-time export mismatch; theme still supports initial color mode */}
         </Flex>
       </Flex>
     </Box>

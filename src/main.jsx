@@ -5,11 +5,10 @@ import App from './App.jsx'
 import { Provider } from 'react-redux'
 import { store } from './store.js'
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from './theme'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ChakraProvider theme={theme}>
+    <ChakraProvider>
       <Provider store={store}>
         <App />
       </Provider>
