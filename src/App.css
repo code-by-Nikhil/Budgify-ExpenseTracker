@@ -12,11 +12,13 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 1.8em rgba(124,58,237,0.25));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 1.8em rgba(6,182,212,0.25));
 }
+
+.card { padding: 2em; background: rgba(255,255,255,0.02); border-radius: 1rem; }
 
 @keyframes logo-spin {
   from {

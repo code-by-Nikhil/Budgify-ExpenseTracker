@@ -2,25 +2,25 @@
 
 :root{
   --retro-accent: linear-gradient(90deg,#7c3aed,#06b6d4);
-  --retro-glass: rgba(255,255,255,0.6);
-  --retro-muted: #64748b;
+  --retro-glass: rgba(255,255,255,0.03);
+  --retro-muted: #94a3b8;
 }
 
-/* Base styles */
+/* Base styles: explicit black background */
 body{
     margin: 0;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: linear-gradient(180deg,#f8fafc 0%, #ffffff 100%);
-    color: #0f172a;
+    background: #000000;
+    color: #f8fafc;
 }
 
-/* Glass utility */
+/* Glass utility for dark background */
 .retro-glass{
-  background: var(--retro-glass);
-  backdrop-filter: blur(6px) saturate(120%);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
   border-radius: 1rem;
-  border: 1px solid rgba(15,23,42,0.06);
+  border: 1px solid rgba(255,255,255,0.04);
 }
 
 /* micro animation */
@@ -30,5 +30,5 @@ body{
 /* heading accent */
 .heading-accent{ background: var(--retro-accent); -webkit-background-clip: text; background-clip: text; color: transparent }
 
-/* small cleanup of leftover chakra class */
+/* Compatibility helper for any remaining container classes */
 .chakra-container{ padding-left: 1rem; padding-right: 1rem; }
