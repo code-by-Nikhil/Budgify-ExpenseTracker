@@ -61,7 +61,9 @@ export default function ExpenseForm({ expenses }) {
   async function handleDelete(id) {
     try {
       await deleteExpense(id).unwrap();
-    } catch (error) {}
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
