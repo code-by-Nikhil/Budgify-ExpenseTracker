@@ -37,8 +37,8 @@ export default function Register() {
           <label className="block text-sm"><span className="text-slate-300">Email</span><input className="mt-1 block w-full px-3 py-2 rounded-md bg-slate-800 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-400" type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email"/></label>
           <label className="block text-sm"><span className="text-slate-300">Password</span><input className="mt-1 block w-full px-3 py-2 rounded-md bg-slate-800 text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-400" type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Enter your password'/></label>
 
-          <button type="submit" className="w-full bg-indigo-500 text-white py-2 rounded-xl">Create Account</button>
-          <button type="button" onClick={()=>window.location.href='/login'} className="w-full mt-2 border border-white/6 text-white py-2 rounded-xl">Already have an account?</button>
+          <button type="submit" className="w-full btn-primary">Create Account</button>
+          <button type="button" onClick={()=>window.location.href='/login'} className="w-full mt-2 btn-outline">Already have an account?</button>
         </form>
 
         <ToastContainer/>

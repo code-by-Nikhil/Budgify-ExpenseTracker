@@ -50,7 +50,7 @@ export default function ExpenseForm({ expenses }) {
     <section>
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold text-white">📊 Tracked Expenses</h3>
-        {display && <button className="px-4 py-2 rounded-xl bg-indigo-500 text-white" onClick={()=>setDisplay(false)}>+ Add Expense</button>}
+        {display && <button className="px-4 py-2 rounded-xl btn-primary" onClick={()=>setDisplay(false)}>+ Add Expense</button>}
       </div>
 
       {!display && (

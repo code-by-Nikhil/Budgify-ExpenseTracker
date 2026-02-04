@@ -45,8 +45,8 @@ export default function Login() {
           </label>
 
           <div className="flex gap-3">
-            <button type="submit" className="flex-1 bg-indigo-500 text-white py-2 rounded-xl hover:bg-indigo-600 transition transform hover:-translate-y-0.5">Login</button>
-            <button type="button" onClick={()=>navigate('/register')} className="flex-1 border border-white/6 text-white py-2 rounded-xl">Create account</button>
+            <button type="submit" className="flex-1 btn-primary">Login</button>
+            <button type="button" onClick={()=>navigate('/register')} className="flex-1 btn-outline">Create account</button>
           </div>
         </form>
 

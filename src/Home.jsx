@@ -18,8 +18,8 @@ export default function Home() {
           <p className="text-slate-300 mb-6">Your smart path to financial freedom</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Motion.button whileTap={{ scale: 0.98 }} onClick={()=>navigate('/register')} className="px-6 py-3 rounded-xl bg-indigo-500 text-white hover:bg-indigo-600 transition micro-bounce">Create Account</Motion.button>
-            <Motion.button whileTap={{ scale: 0.98 }} onClick={()=>navigate('/login')} className="px-6 py-3 rounded-xl border border-white/6 text-white hover:bg-white/2 transition">Login</Motion.button>
+            <Motion.button whileTap={{ scale: 0.98 }} onClick={()=>navigate('/register')} className="btn-primary micro-bounce">Create Account</Motion.button>
+            <Motion.button whileTap={{ scale: 0.98 }} onClick={()=>navigate('/login')} className="btn-outline">Login</Motion.button>
           </div>
         </div>
 
