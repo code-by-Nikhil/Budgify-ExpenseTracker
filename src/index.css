@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+body{
+    max-height: 100vh;
+    margin: 0;
+}
