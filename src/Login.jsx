@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
 import { useLoginMutation } from "./services/apiSlice";
+import { Box, Heading, VStack, Input, Button, Text } from '@chakra-ui/react'
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -38,63 +39,21 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-gray-200 text-center font-bold p-20 min-h-screen flex flex-col gap-5">
-      <h1 className="text-blue-600 font-bold text-6xl">
-        💸Budgify - Expense Tracker
-      </h1>
-      <h1 className="font-bold text-5xl mt-15 mb-7">Login</h1>
-      <form onSubmit={handleSubmit} className="flex justify-center">
-        <div className="flex flex-col gap-5 w-80 p-7 bg-white rounded-md shadow-xl">
-          <div className="flex flex-col text-start">
-            <label>Name</label>
-            <input
-              className="bg-gray-100 p-2 mt-2 font-semibold border border-gray-300 rounded-md"
-              type="text"
-              placeholder="Enter your name"
-            />
-          </div>
-          <div className="flex flex-col text-start">
-            <label>Email</label>
-            <input
-              className="bg-gray-100 p-2 mt-2 font-semibold border border-gray-300 rounded-md"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-            />
-          </div>
+    <Box textAlign="center" py={12}>
+      <Heading size="lg" mb={6}>Login</Heading>
 
-          <div className="flex flex-col text-start">
-            <label>Password</label>
-            <input
-              className="bg-gray-100 p-2 mt-2 font-semibold border border-gray-300 rounded-md"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-            />
-          </div>
+      <VStack as="form" onSubmit={handleSubmit} spacing={4} maxW="md" mx="auto" bg="white" p={6} rounded="md" boxShadow="md">
+        <Text textAlign="left">Email</Text>
+        <Input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter your email"/>
 
-          <div className="mt-3 px-10 flex gap-3 flex-col">
-            <button
-              className="bg-blue-600 rounded text-white p-2 mx-5 cursor-pointer hover:bg-blue-500 duration-200"
-              type="submit"
-            >
-              {" "}
-              Login
-            </button>
-            <button
-              className="bg-green-600 rounded text-white p-3 cursor-pointer hover:bg-green-500 duration-200"
-              type="button"
-              onClick={() => navigate("/register")}
-            >
-              {" "}
-              Create an account
-            </button>
-          </div>
-        </div>
-      </form>
+        <Text textAlign="left">Password</Text>
+        <Input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Enter your password"/>
+
+        <Button colorScheme="teal" type="submit" width="full">Login</Button>
+        <Button variant="outline" colorScheme="teal" width="full" onClick={()=>navigate('/register')}>Create an account</Button>
+      </VStack>
+
       <ToastContainer />
-    </div>
+    </Box>
   );
 }

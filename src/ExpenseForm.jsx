@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import ExpenseCard from "./ExpenseCard";
 import {
   useCreateExpensesMutation,
   useDeleteExpensesMutation,
   useUpdateExpensesMutation,
 } from "./services/apiSlice";
-import { ThemeContext } from "./context/ThemeContext";
+import { Box, Grid, Button, Stack, Input, Select, Heading } from '@chakra-ui/react'
 
 export default function ExpenseForm({ expenses }) {
   const [title, setTitle] = useState("");
@@ -30,12 +30,8 @@ export default function ExpenseForm({ expenses }) {
     try {
       if (editId) {
         await updateExpense({ id: editId, ...payload }).unwrap();
-
-        // const updated = expenses.map((exp) => (exp._id === editId ? res.result : exp))
-        // setExpenses(updated);
       } else {
-          await createExpense(payload).unwrap();
-        // setExpenses([res.result, ...expenses]);
+        await createExpense(payload).unwrap();
       }
 
       // reset
@@ -46,7 +42,7 @@ export default function ExpenseForm({ expenses }) {
 
       setEditId(null);
       setDisplay(true);
-      
+
     } catch (error) {
       console.error(error);
     }
@@ -65,108 +61,42 @@ export default function ExpenseForm({ expenses }) {
   async function handleDelete(id) {
     try {
       await deleteExpense(id).unwrap();
-      // setExpenses(expenses.filter((exp) => exp._id !== id));
     } catch (error) {}
   }
 
-
-  const {theme,handleTheme} = useContext(ThemeContext);
-
   return (
-    <div className="p-10 h-full flex flex-col ">
-      <div className="w-full mb-10 flex justify-center">
-        {display && (
-          <button
-            onClick={() => setDisplay(false)}
-            className="bg-blue-600 rounded text-white p-2 cursor-pointer hover:bg-blue-500  duration-300"
-          >
-            +Add Expense
-          </button>
-        )}
+    <Box>
+      <Stack direction={{base: 'column', md: 'row'}} justify="space-between" align="center" mb={6}>
+        <Heading size="md">📊Tracked Expenses</Heading>
+        {display && <Button colorScheme="teal" onClick={()=>setDisplay(false)}>+ Add Expense</Button>}
+      </Stack>
 
-        <div className="bg-white w-auto rounded-xl">
-          {!display && (
-            <form onSubmit={handleSubmit}>
-              <div className="flex gap-5 p-5">
-                <div className="flex flex-col text-start">
-                  <label>Title</label>
-                  <input
-                    className="bg-gray-100 p-2 mt-2 font-semibold border border-gray-300 rounded-md"
-                    type="text"
-                    placeholder="Expense title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </div>
-                <div className="flex flex-col text-start">
-                  <label>Amount</label>
-                  <input
-                    className="bg-gray-100 p-2 mt-2 font-semibold border border-gray-300 rounded-md"
-                    type="number"
-                    placeholder="e.g. 120"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                  />
-                </div>
-              </div>
+      {!display && (
+        <Box bg="white" p={6} rounded="md" boxShadow="sm" mb={6}>
+          <form onSubmit={handleSubmit}>
+            <Grid templateColumns={{base: '1fr', md: '2fr 1fr'}} gap={4}>
+              <Input placeholder="Title" value={title} onChange={(e)=>setTitle(e.target.value)} />
+              <Input placeholder="Amount" type="number" value={amount} onChange={(e)=>setAmount(e.target.value)} />
+              <Input placeholder="Date" type="date" value={date} onChange={(e)=>setDate(e.target.value)} />
+              <Select value={category} onChange={(e)=>setCategory(e.target.value)}>
+                <option value="Food">Food</option>
+                <option value="Petrol">Petrol</option>
+              </Select>
+            </Grid>
 
-              <div className="flex justify-center gap-5 mt-5">
-                <div className="flex flex-col text-start">
-                  <label>Date</label>
-                  <input
-                    className="px-8 bg-gray-100 p-2 mt-2 font-semibold border border-gray-300 rounded-md"
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                  />
-                </div>
+            <Stack direction="row" justify="flex-end" mt={4}>
+              <Button variant="ghost" onClick={()=>setDisplay(true)}>Cancel</Button>
+              <Button colorScheme="green" type="submit">{editId ? 'Update' : 'Add Expense'}</Button>
+            </Stack>
+          </form>
+        </Box>
+      )}
 
-                <div className="flex flex-col text-start">
-                  <label>Category</label>
-                  <select
-                    className="px-18 bg-gray-100 p-2 mt-2 font-semibold border border-gray-300 rounded-md"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    <option value="Food">Food</option>
-                    <option value="Petrol">Petrol</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="m-6 flex justify-end gap-4 font-semibold">
-                <button
-                  className="bg-gray-200 rounded p-2 cursor-pointer hover:bg-gray-300 duration-200"
-                  type="button"
-                  onClick={() => setDisplay(true)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="bg-green-600 rounded text-white p-2 cursor-pointer hover:bg-green-500 duration-200"
-                  type="submit"
-                >
-                  {editId ? "Update" : "Add Expense"}
-                </button>
-              </div>
-            </form>
-          )}
-        </div>
-      </div>
-
-      <h2 className={`flex text-4xl ${theme === "light" ? "text-black" : "text-white"}`}>📊Tracked Expenses</h2>
-      <div className="grid grid-cols-4 gap-3">
-        {expenses?.map((expense) => {
-          return (
-            <ExpenseCard
-              key={expense._id}
-              expense={expense}
-              onEdit={() => handleEdit(expense)}
-              onDelete={() => handleDelete(expense._id)}
-            />
-          );
-        })}
-      </div>
-    </div>
+      <Grid templateColumns={{base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)'}} gap={4}>
+        {expenses?.map((expense) => (
+          <ExpenseCard key={expense._id} expense={expense} onEdit={() => handleEdit(expense)} onDelete={() => handleDelete(expense._id)} />
+        ))}
+      </Grid>
+    </Box>
   );
 }

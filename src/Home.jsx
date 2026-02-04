@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import { Box, Heading, Text, Button, Stack } from '@chakra-ui/react'
 
 export default function Home() {  
 
@@ -6,13 +7,14 @@ export default function Home() {
     
 
   return (
-    <div className='bg-gray-200 text-center font-bold p-20 min-h-screen flex flex-col justify-center gap-5'>
-      <h1 className='text-blue-600 font-bold text-6xl'>💸Budgify - Expense Tracker</h1>
-      <h1 className='text-gray-500 font-semibold text-2xl'>Welcome to the next level expense tracker you will ever met</h1>
-      <div className="flex justify-center gap-5">
-        <button className='bg-blue-600 text-white p-2 border rounded-md font-bold text-xl cursor-pointer hover:bg-blue-500' onClick={()=>navigate('/register')}>Sign Up</button>
-        <button className='bg-blue-600 text-white p-2 border rounded-md font-bold text-xl cursor-pointer hover:bg-blue-500' onClick={()=>navigate('/login')}>Log In</button>
-      </div>
-    </div>
+    <Box textAlign="center" py={28}>
+      <Heading color="teal.500" size="2xl">💸 Budgify</Heading>
+      <Text color="gray.500" fontSize="lg" mt={4}>Your smart path to financial freedom</Text>
+
+      <Stack direction={{base: 'column', md: 'row'}} spacing={6} justify="center" mt={8}>
+        <Button colorScheme="teal" size="lg" onClick={()=>navigate('/register')}>Create Account</Button>
+        <Button colorScheme="teal" variant="outline" size="lg" onClick={()=>navigate('/login')}>Login</Button>
+      </Stack>
+    </Box>
   )
 }

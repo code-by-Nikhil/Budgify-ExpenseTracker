@@ -1,40 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
+import { Box, Text, Stack, HStack, Tag, IconButton } from '@chakra-ui/react'
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons'
 
 export default function ExpenseCard({ expense, onDelete, onEdit }) {
   return (
-    <div className="mt-5 border border-gray-200 shadow-xl bg-white rounded-xl p-6 gap-5 hover:scale-105 duration-300">
-      <div>
-        <h4 className="text-xl text-start">
-          Title: <span className="font-medium">{expense.title}</span>
-        </h4>
-        <h4 className="text-xl text-start">
-          Amount: <span className="font-medium">{expense.amount}</span>
-        </h4>
-        <h4 className="text-xl text-start">
-          Date:{" "}
-          <span className="font-medium">{expense.date?.slice(0, 10)}</span>
-        </h4>
-        <h4 className="text-xl text-start">
-          Category: <span className="font-medium">{expense.category}</span>
-        </h4>
-      </div>
+    <Box bg="white" p={4} rounded="md" boxShadow="sm" _hover={{ transform: 'translateY(-4px)', boxShadow: 'md' }} transition="all 0.2s">
+      <Stack spacing={2}>
+        <HStack justify="space-between">
+          <Text fontWeight="semibold">{expense.title}</Text>
+          <Tag colorScheme="teal">${expense.amount}</Tag>
+        </HStack>
 
-      <div className="mt-3 flex gap-4">
-        <button
-          type="button"
-          className="rounded text-white bg-green-500 px-2 py-1 cursor-pointer hover:bg-green-400 duration-200"
-          onClick={onEdit}
-        >
-          Edit
-        </button>
-        <button
-          type="button"
-          className="rounded text-white bg-red-500 px-2 py-1 cursor-pointer hover:bg-red-400 duration-200"
-          onClick={onDelete}
-        >
-          Delete
-        </button>
-      </div>
-    </div>
+        <Text color="gray.500" fontSize="sm">{expense.date ? new Date(expense.date).toLocaleDateString() : '-'}</Text>
+        <Text>{expense.category}</Text>
+
+        <HStack spacing={3} mt={2}>
+          <IconButton size="sm" aria-label="Edit" icon={<EditIcon />} onClick={onEdit} />
+          <IconButton size="sm" aria-label="Delete" icon={<DeleteIcon />} colorScheme="red" onClick={onDelete} />
+        </HStack>
+      </Stack>
+    </Box>
   );
 }
