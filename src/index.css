@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
 
 :root{
   --retro-accent: linear-gradient(90deg,#7c3aed,#06b6d4);
