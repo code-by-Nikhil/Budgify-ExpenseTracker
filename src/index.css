@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root{
   --retro-accent: linear-gradient(90deg,#7c3aed,#06b6d4);
@@ -13,6 +15,10 @@ body{
     background: #000000;
     color: #f8fafc;
 }
+
+/* Extra utilities */
+.glow { box-shadow: 0 6px 30px rgba(124,58,237,0.18); }
+.tilt { transform: perspective(600px) rotateX(1.5deg) rotateY(-1deg); }
 
 /* Glass utility for dark background */
 .retro-glass{

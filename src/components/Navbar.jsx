@@ -13,9 +13,9 @@ export default function Navbar() {
           <Motion.img src={logo} alt="Budgify" className="h-10 w-10 rounded-lg" whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.98 }} />
           <button onClick={()=>navigate('/')} className="text-white font-bold text-lg">Budgify</button>
           <nav className="hidden md:flex gap-4 text-slate-200">
-            <Link to="/expenses" className="hover:text-indigo-400">Expenses</Link>
-            <Link to="/login" className="hover:text-indigo-400">Login</Link>
-            <Link to="/register" className="hover:text-indigo-400">Register</Link>
+            <Motion.span whileHover={{ scale:1.02, color: '#7c3aed' }} className="cursor-pointer"><Link to="/expenses">Expenses</Link></Motion.span>
+            <Motion.span whileHover={{ scale:1.02, color: '#7c3aed' }} className="cursor-pointer"><Link to="/login">Login</Link></Motion.span>
+            <Motion.span whileHover={{ scale:1.02, color: '#7c3aed' }} className="cursor-pointer"><Link to="/register">Register</Link></Motion.span>
           </nav>
         </div>
 
