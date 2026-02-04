@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" role="img" aria-label="retro hero illustration">
+  <rect width="800" height="400" rx="20" fill="#f8fafc"/>
+  <g transform="translate(40,60)">
+    <rect width="260" height="180" rx="16" fill="#fff" stroke="#e6eef6" />
+    <circle cx="80" cy="90" r="36" fill="#7c3aed" />
+    <rect x="140" y="40" width="120" height="20" rx="8" fill="#06b6d4" />
+    <rect x="140" y="70" width="200" height="12" rx="6" fill="#e2e8f0" />
+  </g>
+  <g transform="translate(340,60)">
+    <rect width="360" height="260" rx="16" fill="#ffffff" stroke="#e6eef6" />
+    <rect x="24" y="24" width="312" height="44" rx="8" fill="#06b6d4" />
+    <rect x="24" y="84" width="220" height="12" rx="6" fill="#f1f5f9" />
+    <rect x="24" y="110" width="280" height="12" rx="6" fill="#f1f5f9" />
+    <rect x="24" y="136" width="140" height="12" rx="6" fill="#f1f5f9" />
+  </g>
+</svg>
